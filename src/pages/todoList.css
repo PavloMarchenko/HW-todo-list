@@ -1,0 +1,61 @@
+.main-block {
+
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  border: black solid 1px;
+}
+
+.todo-block {
+  position: relative;
+  top: 30vh;
+  left: 35vw;
+  padding: 20px;
+  width: 300px;
+  max-width: auto;
+  max-height: auto;
+  background-color: gainsboro;
+  border-radius: 4px;
+}
+
+.todo-task-save {
+  margin-top: 30px;
+}
+
+.btn-save {
+  display: block;
+  position: relative;
+  left: 250px;
+  margin-top: 10px;
+}
+
+.btn-done {
+  background-color: green;
+}
+
+.btn-del {
+  background-color: red;
+}
+
+.btn-edit {
+  background-color: blue;
+}
+
+input {
+  width: 70%;
+  position: absolute;
+  right: 20px;
+}
+
+button {
+  border: none;
+}
+
+.all-btn {
+  display: flex;
+  align-items: stretch;
+}
+
