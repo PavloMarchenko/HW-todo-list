@@ -1,6 +1,41 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 0 auto;
+  align-items: center;
+  border: blue solid 50px;
+}
+
 .form-block {
   display: flex;
   flex-direction: column;
   max-width: 300px;
   margin: 0 auto;
+}
+
+a {
+  color: black;
+}
+
+.btn-sign-in {
+  max-width: 50%;
+  margin: auto;
+  background-color: blue;
+}
+
+.checkbox {
+  margin-left: 0;
+}
+
+.form :first-child {
+  margin-bottom: 5px;
+}
+
+h2 {
+  margin-top: 5px;
+}
+
+.class-errors {
+  display: block;
 }

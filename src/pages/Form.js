@@ -54,13 +54,17 @@ class Form extends Component{
         <form onSubmit={this.onSubmit} className='form-block'>
           <input onChange={this.onChangeEmail} value={this.state.email}/>
           <input type='password' onChange={this.onChangePassword} value={this.state.password}/>
-          <input onChange={this.onChangeCheckbox.bind(this)} checked={this.state.keepMeSignedIn}  type="checkbox" />
+          <div>
+            <input className="checkbox" onChange={this.onChangeCheckbox.bind(this)} checked={this.state.keepMeSignedIn}  type="checkbox" />
+            <span>Keep me signed in</span>
+          </div>
+         
           <div>
             {this.state.error.map((err) => {
-              return <span key={err}>{err}</span>
+              return <span className="class-errors" key={err}>{err}</span>
             })}
           </div>
-          <button type='submit'>SIGN IN</button>
+          <button className="btn-sign-in" type='submit'>SIGN IN</button>
         </form>
         <a href="#">Forgot your password?</a>
       </div>
