@@ -1,21 +1,12 @@
 import './todoList.css'
 import {Component} from 'react'
+import {connect} from 'react-redux'
+import {addTodo, editTodo, toggleTodo, removeTodo} from '../actions/todoActions' 
 
 class TodoList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      list: [
-        {
-          text: 'qwe',
-          done: true
-        },
-        {
-          text: 'ewq',
-          done: false
-        }
-      ],
-
       value: '',
       editIndex: -1
     }
@@ -27,39 +18,42 @@ class TodoList extends Component {
         text: this.state.value,
         done: false
       }
-      const listCopy = [...this.state.list, newItem]
-      this.setState({list: listCopy, value: ''})
+      this.setState({value: ''})
+      this.props.addTodo(newItem);
     } else {
-      const listCopy = [...this.state.list];
-      listCopy[this.state.editIndex] = { ...listCopy[this.state.editIndex], text: this.state.value};
-      this.setState({ list: listCopy, value: '', editIndex: -1});
+      const newItem = { 
+        ...this.props.list[this.state.editIndex],
+        text: this.state.value
+      }
+      
+      this.props.editTodo(newItem, this.state.editIndex)
+      this.setState({
+        value: '',
+        editIndex: -1
+      })
     }
    
   }
 
   markToggle = (index) => {
-    const listCopy = [...this.state.list]
-    listCopy[index] = {...listCopy[index], done: !listCopy[index].done}
-    this.setState({list: listCopy})
+    this.props.toggleTodo(!this.props.list[index].done, index)
   }
 
   delItem = (index) => {
-    const listCopy = [...this.state.list]
-    listCopy.splice(index, 1)
-    this.setState({list: listCopy})
+    this.props.removeTodo(index)
   }
 
   editItem = (index) => {
-    this.setState({value: this.state.list[index].text, editIndex: index})
+    this.setState({value: this.props.list[index].text, editIndex: index})
   }
 
   render() {
-    
+    console.log(this.props.list)
     return (
       <div className="main-block">
         <div className="todo-block">
         <h2>To do:</h2>
-        {this.state.list.map((listItem, i) => {
+        {this.props.list.map((listItem, i) => {
 
           return (
             <div key={`${listItem.text}-${i}`} className="row">
@@ -87,5 +81,16 @@ class TodoList extends Component {
   }
   
 }
-
-export default TodoList;
+export default connect(
+  state => {
+    return {
+      list: state.todo.list
+    }
+  },
+  {
+    addTodo,
+    editTodo,
+    removeTodo,
+    toggleTodo
+  }
+)(TodoList) ;
